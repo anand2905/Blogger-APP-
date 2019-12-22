@@ -1,22 +1,23 @@
-<h1>New post</h1>
+<div id="page_wrapper">
+  <h1>New post</h1>
+  <%= form_for :post, url: posts_path do |f| %>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
 
-<%= form_for :post, url: posts_path do |f| %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
+    <p>
+      <%= f.label :body %><br>
+      <%= f.text_field :body %>
+    </p>
 
-  <p>
-    <%= f.label :body %><br>
-    <%= f.text_field :body %>
-  </p>
+    <p>
+      <%= f.label :image %><br>
+      <%= f.file_field :image %>
+    </p>
 
-  <p>
-    <%= f.label :image %><br>
-    <%= f.file_field :image %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
+</div>
