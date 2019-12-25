@@ -4,6 +4,10 @@
   </h1>
   <p class="date">
     Submitted <%= time_ago_in_words(@post.created_at) %> Ago
+    <% if user_signed_in? %>
+    | <%= link_to 'Edit', edit_post_path(@post) %>
+    |<%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+    <% end %>
   </p>
   <p class="body">
     <%= @post.body %>
@@ -11,5 +15,14 @@
   <p>
     <%= link_to(image_tag(@post.image.thumb.url, alt: 'Image'), @post.image.url, target: '_blank') if @post.image? %>
   </p>
-  <p><%= link_to 'Edit', edit_post_path(@post) %></p>
+   <h3>Comments</h3>
+    <%= form_for [@post, Comment.new] do |f| %>
+      <%= f.text_area :body, placeholder: "Add a comment" %><br/>
+      <%= f.submit "Add Comment" %>
+    <% end %>
+
+  <ul>
+    <%= render @post.comments %>
+  </ul>
 </div>
+

@@ -1,0 +1,23 @@
+<li class="add_reply">
+  <%= comment.body %> -
+  <small>Submitted <%= time_ago_in_words(comment.created_at) %> ago</small>
+  <p>
+    <% if user_signed_in? %>
+      <%= link_to 'Delete', [comment.commentable, comment], method: :delete, class: "button", data: {confirm: "Are you sure?"} %>
+      <% end %>
+    </p>
+  <%= form_for [comment, Comment.new] do |f| %>
+    <%= f.text_area :body, placeholder: "Add a Reply" %><br/>
+    <%= f.hidden_field :post_id, :value => @post.id %>
+    <%= f.submit "Reply"  %>
+  <% end %>
+  <ul>
+    <%= render comment.comments %>
+  </ul>
+</li>
+
+<style type="text/css">
+.add_reply {
+  margin-left: 30px;
+}
+</style>
